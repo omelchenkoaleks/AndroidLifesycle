@@ -15,8 +15,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mTextView = findViewById(R.id.text_view);
+
+        if (savedInstanceState != null) {
+            mTextView.setText(savedInstanceState.getString("textToBundle"));
+        }
         Log.i("happy", "onCreate");
         mTextView.append("onCreate" + "\n");
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        Log.i("happy", "onSaveInstanceState");
+        mTextView.append("onSaveInstanceState" + "\n");
+
+        outState.putString("textToBundle", mTextView.getText().toString());
     }
 
     @Override
